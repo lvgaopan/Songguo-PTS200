@@ -65,7 +65,7 @@ bool PIDenable = PID_ENABLE;
 bool beepEnable = BEEP_ENABLE;
 uint8_t VoltageValue = VOLTAGE_VALUE;
 bool QCEnable = QC_ENABLE;
-uint8_t WAKEUPthreshold = WAKEUP_THRESHOLD;
+uint16_t WAKEUPthreshold = WAKEUP_THRESHOLD;
 bool restore_default_config = false;
 
 // T12的默认值
@@ -383,9 +383,9 @@ void SENSORCheck() {
       Serial.println("进入工作状态!");
     }*/
   // #if defined(LIS)
-  if (abs(accel.getX() - gx) > WAKEUP_THRESHOLD ||
-      abs(accel.getY() - gy) > WAKEUP_THRESHOLD ||
-      abs(accel.getZ() - gz) > WAKEUP_THRESHOLD) {
+  if (abs(accel.getX() - gx) > WAKEUPthreshold ||
+      abs(accel.getY() - gy) > WAKEUPthreshold ||
+      abs(accel.getZ() - gz) > WAKEUPthreshold) {
     gx = accel.getX();
     gy = accel.getY();
     gz = accel.getZ();
@@ -766,7 +766,7 @@ void TimerScreen() {
         timeOfBoost = InputScreen(BoostTimerItems);
         break;
       case 3:
-        setRotary(0, 50, 5, WAKEUPthreshold);
+        setRotary(0, 500, 5, WAKEUPthreshold);
         WAKEUPthreshold = InputScreen(WAKEUPthresholdItems);
         break;
       default:

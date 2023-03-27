@@ -13,7 +13,7 @@
 #define ADDR_VOLTAGE_VALUE ADDR_BEEP_ENABLE + 1
 #define ADDR_QC_ENABLE ADDR_VOLTAGE_VALUE + 1
 #define ADDR_WAKEUP_THRESHOLD ADDR_QC_ENABLE + 1
-#define ADDR_CURRENT_TIP ADDR_WAKEUP_THRESHOLD + 1
+#define ADDR_CURRENT_TIP ADDR_WAKEUP_THRESHOLD + 2
 #define ADDR_NUMBER_OF_TIPS ADDR_CURRENT_TIP + 1
 
 #define ADDR_TIP_NAME ADDR_NUMBER_OF_TIPS + 1
@@ -36,7 +36,7 @@ extern bool PIDenable;
 extern bool beepEnable;
 extern uint8_t VoltageValue;
 extern bool QCEnable;
-extern uint8_t WAKEUPthreshold;
+extern uint16_t WAKEUPthreshold;
 extern uint8_t CurrentTip;
 extern uint8_t NumberOfTips;
 
@@ -60,7 +60,7 @@ bool write_default_EEPROM()
   EEPROM.writeBool(ADDR_BEEP_ENABLE, BEEP_ENABLE);
   EEPROM.writeUChar(ADDR_VOLTAGE_VALUE, VOLTAGE_VALUE);
   EEPROM.writeBool(ADDR_QC_ENABLE, QC_ENABLE);
-  EEPROM.writeUChar(ADDR_WAKEUP_THRESHOLD, WAKEUP_THRESHOLD);
+  EEPROM.writeUShort(ADDR_WAKEUP_THRESHOLD, WAKEUP_THRESHOLD);
   EEPROM.writeUChar(ADDR_CURRENT_TIP, 0);
   EEPROM.writeUChar(ADDR_NUMBER_OF_TIPS, 1);
 
@@ -125,7 +125,7 @@ bool update_EEPROM()
   EEPROM.writeBool(ADDR_BEEP_ENABLE, beepEnable);
   EEPROM.writeUChar(ADDR_VOLTAGE_VALUE, VoltageValue);
   EEPROM.writeBool(ADDR_QC_ENABLE, QCEnable);
-  EEPROM.writeUChar(ADDR_WAKEUP_THRESHOLD, WAKEUPthreshold);
+  EEPROM.writeUShort(ADDR_WAKEUP_THRESHOLD, WAKEUPthreshold);
   EEPROM.writeUChar(ADDR_CURRENT_TIP, CurrentTip);
   EEPROM.writeUChar(ADDR_NUMBER_OF_TIPS, NumberOfTips);
 
@@ -182,7 +182,7 @@ bool read_EEPROM()
   beepEnable = EEPROM.readBool(ADDR_BEEP_ENABLE);
   VoltageValue = EEPROM.readUChar(ADDR_VOLTAGE_VALUE);
   QCEnable = EEPROM.readBool(ADDR_QC_ENABLE);
-  WAKEUPthreshold = EEPROM.readUChar(ADDR_WAKEUP_THRESHOLD);
+  WAKEUPthreshold = EEPROM.readUShort(ADDR_WAKEUP_THRESHOLD);
   CurrentTip = EEPROM.readUChar(ADDR_CURRENT_TIP);
   NumberOfTips = EEPROM.readUChar(ADDR_NUMBER_OF_TIPS);
 
